@@ -1,0 +1,20 @@
+{
+  "name": "2048-multiplayer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "ejs": "*",
+    "socket.io": "*",
+    "mongoose": "*",
+    "passport": "*",
+    "passport-google": "*",
+    "passport-google-oauth": "*",
+    "passport-twitter": "*",
+    "passport-facebook": "*",
+    "passport-local": "*"
+  }
+}

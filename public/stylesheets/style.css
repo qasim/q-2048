@@ -1,0 +1,531 @@
+::selection {
+	background: none;
+}
+
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(1);}
+		50% {-webkit-transform: scale(1);}
+		100% {-webkit-transform: scale(1.1);}
+}
+
+@-webkit-keyframes fade-in {
+	0%   { -webkit-transform: scale(0); }
+	100% { -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes fade-in-opp {
+	0%   {  }
+	100% {  }
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 12pt "Helvetica Neue", helvetica, arial, clean, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+	a:link, a:visited {
+		text-decoration: none;
+		color: #000;
+	}
+
+  .username-prompt {
+    background: #dedede;
+    padding: 16px;
+		min-height: 19px;
+		text-align: center;
+		display: none;
+  }
+
+		.username-prompt .connecting {
+			font-weight: bold;
+			display: none;
+		}
+
+		.sign-in {
+			display: none;
+			margin-left: 16px;
+			margin-right: 16px;
+		}
+
+	.intro {
+		margin: 24px auto;
+		width: 488px;
+		padding: 16px;
+		background: #dedede;
+		line-height: 28px;
+		padding-bottom: 6px;
+	}
+
+		.intro h1 {
+			margin: 0px;
+			padding-bottom: 16px;
+		}
+
+		.intro h2 {
+			margin: 0px;
+			padding-bottom: 16px;
+		}
+
+		.login {
+			overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+		}
+
+		.intro #username {
+			padding: 12px;
+			font-size: 16px;
+			text-align: center;
+			width: 400px;
+			border: 0;
+			outline: 0;
+			margin-bottom: 9px;
+			margin-right: 0px;
+		}
+
+		.intro #go {
+			border: 0;
+			padding: 12px;
+			font-size: 16px;
+			width: 60px;
+			margin-left: 0px;
+			outline: 0;
+			background: #ccc;
+			-webkit-transition: 100ms all ease-in-out;
+		}
+
+		.intro #go:hover {
+			background: #bbb;
+		}
+
+		.intro #go:active {
+			background: #999;
+		}
+
+    /*.username-prompt #username {
+      display: block;
+      padding: 10px;
+      font-size: 18pt;
+      width: 600px;
+      text-align: center;
+      margin: 0 auto;
+    }*/
+
+  .lobby {
+    display: none;
+    margin: 20px auto;
+    font-size: 16px;
+    width: 598px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background: #ddd;
+    font-weight: bold;
+  }
+
+    .lobby-header {
+			position:relative;
+      background: #ededed;
+      text-align: left;
+      font-size: 32px;
+      height: 66px;
+      line-height: 42px;
+      border-bottom: 1px solid #ccc;
+    }
+
+      .username {
+        background: #F5F5F5;
+        float: left;
+        padding: 12px 18px;
+        border-right: 1px solid #ccc;
+        max-width: 231px;
+        max-height: 42px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tip {
+        display: inline;
+        color: #7D7D7D;
+        font-size: 16px;
+        line-height: 66px;
+        padding-left: 16px;
+      }
+
+			.logout-button {
+				position: absolute;
+		    top: 0px;
+		    right: 0px;
+		    padding: 4px 6px;
+		    font-size: 12px;
+		    font-weight: normal;
+		    background: #F5F5F5;
+		    line-height: normal;
+		    border-bottom: 1px solid #ccc;
+		    border-left:  1px solid #ccc;
+		    cursor: pointer;
+			}
+
+    .users {
+      padding: 6px;
+      padding-right: 3px;
+      padding-bottom: 0px;
+    }
+
+			.nothing {
+				font-weight: normal;
+				color: #999;
+				font-style: italic;
+				padding: 6px;
+				padding-bottom: 12px;
+			}
+
+      .user {
+        display: inline-block;
+        padding: 12px 16px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        background: #efefef;
+        border: 1px solid #cdcdcd;
+        width: 156px;
+				max-width: 156px;
+        cursor: pointer;
+				overflow: hidden;
+				text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .user:hover {
+        background: #fff;
+      }
+
+      .user:active {
+        background: #DEDEDE;
+      }
+
+  .dark {
+    display: none;
+		z-index: 5;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-top: 96px;
+    text-align: center;
+    font-size: 32px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+	.mobile-user {
+		background: #333333;
+	}
+
+	.game-over b.title {
+		font-size: 64px;
+	}
+
+    .button {
+      border: 1px solid #fff;
+      font-size: 16px;
+      padding: 6px 6px;
+      font-weight: bold;
+      width: 142px;
+      margin: 20px auto;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .button:active {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .button-accept, .button-reject {
+      display: inline-block;
+      width: 66px;
+    }
+
+		.button-return {
+			/*display: inline-block;*/
+			width: 132px;
+		}
+
+		.button-rematch {
+			display: inline-block;
+			width: 78px;
+		}
+
+  .game {
+    width: 800px;
+		height: 400px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin: 24px auto;
+    background: #ededed;
+		display: none;
+  }
+
+		.game .local {
+			float: left;
+		}
+
+		.game .opponent {
+			float:right;
+		}
+
+		.game .player-info {
+			width: 292px;
+			height: 48px;
+			padding: 12px;
+			background: #CCC;
+			margin-bottom: 12px;
+		}
+
+			.player-name {
+				float: left;
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 48px;
+				width: 200px;
+				max-width: 200px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+        white-space: nowrap;
+			}
+
+			.player-score {
+				float:right;
+				background: #aaa;
+				height: 48px;
+				line-height: 48px;
+				padding-left: 12px;
+				padding-right: 12px;
+				font-weight: bold;
+				font-size: 18px;
+				text-align: center;
+				width: 56px;
+				max-width: 56px;
+				text-overflow: ellipsis;
+        white-space: nowrap;
+			}
+
+		.time-box {
+			display: inline-block;
+			background: #ccc;
+			width: 120px;
+			height: 48px;
+			line-height: 48px;
+			text-align: center;
+			padding: 12px;
+			margin-left: 12px;
+			font-size: 42px;
+		}
+
+    .game-container {
+      width: 316px;
+      height: 316px;
+      background: #757575;
+      position: relative;
+      cursor: default;
+    }
+
+      .grid-row {
+        padding-left: 12px;
+        padding-top: 12px;
+      }
+
+        .grid-cell {
+          width: 64px;
+          height: 64px;
+          margin-right: 12px;
+          margin-bottom: 12px;
+          float: left;
+          background: rgba(255, 255, 255, 0.35);
+        }
+
+    .tile-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 2;
+    }
+
+      .tile {
+        position: absolute;
+        -webkit-transition: 60ms ease-in-out;
+        transition-property: transform;
+        width: 64px;
+        height: 64px;
+        line-height: 64px;
+        text-align: center;
+        font-size: 34px;
+        font-weight: bold;
+        color: #776e65;
+				display: none;
+      }
+
+			.local .tile {
+				-webkit-animation-name: fade-in;
+				-webkit-animation-duration: 60ms;
+			}
+
+			.opponent .tile {
+				-webkit-animation-name: fade-in-opp;
+				-webkit-animation-duration: 60ms;
+			}
+
+      .tile.tile-2 {
+      	background: #eee4da;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+      }
+
+      .tile.tile-4 {
+      	background: #ede0c8;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+      }
+
+      .tile.tile-8 {
+      	color: #f9f6f2;
+      	background: #f2b179;
+      }
+
+      .tile.tile-16 {
+      	color: #f9f6f2;
+      	background: #f59563;
+      }
+
+      .tile.tile-32 {
+      	color: #f9f6f2;
+      	background: #f67c5f;
+      }
+
+      .tile.tile-64 {
+      	color: #f9f6f2;
+      	background: #f65e3b;
+      }
+
+      .tile.tile-128 {
+      	color: #f9f6f2;
+      	background: #edcf72;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+      	font-size: 26px;
+      }
+
+      .tile.tile-256 {
+      	color: #f9f6f2;
+      	background: #edcc61;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+      	font-size: 26px;
+      }
+
+      .tile.tile-512 {
+      	color: #f9f6f2;
+      	background: #edc850;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+      	font-size: 26px;
+      }
+
+      .tile.tile-1024 {
+      	color: #f9f6f2;
+      	background: #edc53f;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+      	font-size: 18px;
+      }
+
+      .tile.tile-2048 {
+      	color: #f9f6f2;
+      	background: #edc22e;
+      	box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+      	font-size: 18px;
+      }
+
+			.tile.pulse {
+				-webkit-animation: pulsate 120ms ease-out;
+			}
+
+      .tile-position-0-0 {
+        top: 12px;
+        left: 12px;
+      }
+
+      .tile-position-0-1 {
+        top: 88px;
+        left: 12px;
+      }
+
+      .tile-position-0-2 {
+        top: 164px;
+        left: 12px;
+      }
+
+      .tile-position-0-3 {
+        top: 240px;
+        left: 12px;
+      }
+
+      .tile-position-1-0 {
+        top: 12px;
+        left: 88px;
+      }
+
+      .tile-position-1-1 {
+        top: 88px;
+        left: 88px;
+      }
+
+      .tile-position-1-2 {
+        top: 164px;
+        left: 88px;
+      }
+
+      .tile-position-1-3 {
+        top: 240px;
+        left: 88px;
+      }
+
+      .tile-position-2-0 {
+        top: 12px;
+        left: 164px;
+      }
+
+      .tile-position-2-1 {
+        top: 88px;
+        left: 164px;
+      }
+
+      .tile-position-2-2 {
+        top: 164px;
+        left: 164px;
+      }
+
+      .tile-position-2-3 {
+        top: 240px;
+        left: 164px;
+      }
+
+      .tile-position-3-0 {
+        top: 12px;
+        left: 240px;
+      }
+
+      .tile-position-3-1 {
+        top: 88px;
+        left: 240px;
+      }
+
+      .tile-position-3-2 {
+        top: 164px;
+        left: 240px;
+      }
+
+      .tile-position-3-3 {
+        top: 240px;
+        left: 240px;
+      }

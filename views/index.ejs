@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      window.user = <%- user %>;
+    </script>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/moment.js"></script>
+    <script src="javascripts/fun.js"></script>
+    <script src="javascripts/app.js"></script>
+  </head>
+  <body>
+    <div class="username-prompt">
+      <a class="sign-in" href="/auth/google">Sign in with <b style="color: #EE1729">Google</b></a>
+      <a class="sign-in" href="/auth/twitter">Sign in with <b style="color: #55acee">Twitter</b></a>
+      <a class="sign-in" href="/auth/facebook">Sign in with <b style="color: #335795">Facebook</b></a>
+      <span class="connecting">Connecting...</span>
+    </div>
+    <div class="sign-in intro">
+      <h1>Q-2048</h1>
+      A multiplayer version of the popular
+      <a href="http://gabrielecirulli.github.io/2048/" target="_blank"><i>2048</i></a>
+        game. Sign in using any of the services above, and play with your friends! Use your arrow keys to move the tiles. When two tiles with the same number touch, they merge into one!
+        <br /> <br />
+        <div style="text-align: right; color: #333;font-size: 12px;">Created by <a href="http://qas.im"><i>Qasim Iqbal</i></a> as a grade 12 CS culminating project.</div>
+    </div>
+    <div class="sign-in intro">
+      <h2>Play without signing in</h2>
+      <div class="login">
+        <input type="text" id="username" maxlength="20" placeholder="Enter username..." />
+        <input type="button" id="go" value="Go" />
+      </div>
+    </div>
+    <div class="lobby">
+      <div class="lobby-header">
+        <a class="logout-button" href="/logout">Logout</a>
+        <div class="username">
+
+        </div>
+        <div class="tip">
+          Select an online user to challenge them.
+        </div>
+      </div>
+      <div class="users">
+      </div>
+    </div>
+    <div class="dark mobile-user">
+      This web application does not function on mobile devices (yet).
+    </div>
+    <div class="dark session-closed">
+      <b>Session closed:</b> You logged in from another location.
+    </div>
+    <div class="dark challenge-waiting">
+      Awaiting response from <b id="challengedUser">User</b>...
+      <input type="hidden" id="challengedUser_id" value="" />
+      <div class="button button-cancel">
+        Cancel Challenge
+      </div>
+    </div>
+    <div class="dark challenge-received">
+      You have received a challenge from <b id="challengerUser">User</b>.
+      <input type="hidden" id="challengerUser_id" value="" />
+      <br />
+      <div class="button button-accept">
+        Accept
+      </div>
+      <div class="button button-reject">
+        Reject
+      </div>
+    </div>
+    <div class="dark opponent-disconnected">
+      <b id="opponent">User</b> disconnected. What a loser.
+      <br />
+      <div class="button button-return">
+        Return to Lobby
+      </div>
+    </div>
+    <div class="dark game-over">
+      <b class="title">You win!</b>
+      <br /> <br />
+      <b class="local-score">0</b> - <span class="opponent-score">0</span>
+      <br /> <br />
+      <div class="button button-return">
+        Return to Lobby
+      </div>
+    </div>
+    <div class="game">
+      <div class="local">
+        <div class="player-info">
+          <div class="player-name">
+            User
+          </div>
+          <div class="player-score">
+            0
+          </div>
+        </div>
+        <div class="game-container">
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+          <div class="tile-container">
+
+          </div>
+        </div>
+      </div>
+      <div class="time-box">
+        0:00
+      </div>
+      <div class="opponent">
+        <div class="player-info">
+          <div class="player-name">
+            User
+          </div>
+          <div class="player-score">
+            0
+          </div>
+        </div>
+        <div class="game-container">
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+          <div class="tile-container">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
